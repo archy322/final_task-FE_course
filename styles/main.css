@@ -44,7 +44,7 @@ html, body {
     flex-direction: row;
 }
 
-#menuToggle {
+#menu-toggle {
     display: none;
 }
 
