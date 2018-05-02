@@ -1,0 +1,125 @@
+@font-face {
+    font-family: "FuturaPTDemi";
+    src: url("../fonts/FuturaPTDemi.otf");
+}
+
+@font-face {
+    font-family: "FuturaPTHeavy";
+    src: url("../fonts/FuturaPTHeavy.otf");
+}
+
+@font-face {
+    font-family: "HelveticaNeue-Bold";
+    src: url("../fonts/HelveticaNeue-Bold.ttf");
+}
+
+@font-face {
+    font-family: "HelveticaNeue";
+    src: url("../fonts/HelveticaNeue.ttf");
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.page-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#header {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    border-bottom: 2px solid black;
+    background: white;
+    font-family: "HelveticaNeue", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+#logo img {
+    width: 200px;
+    height: 70px;
+    margin: 10px 0 15px 15px;
+}
+
+.header__menu__items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 900px;
+}
+
+#menu .header__menu__items li {
+    display: inline-block;
+    font-size: 16pt;
+}
+
+#menu .header__menu__items li a:after {
+    display: block;
+    content: "";
+    height: 2px;
+    width: 0;
+    background-color: red;
+    transition: width .3s ease-in-out;
+}
+
+#menu .header__menu__items li a:hover:after,
+#menu .header__menu__items li a:focus:after {
+    width: 100%;
+}
+
+#menu .header__menu__items li a {
+    text-decoration: none;
+    color: black;
+}
+
+.contacts__items {
+    list-style: none;
+    margin-right: 20px;
+}
+
+.contacts__items li:last-child {
+    margin-top: 10px;
+}
+
+.contacts__items a {
+    text-decoration: none;
+    color: black;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.contacts__items li a:after {
+    display: block;
+    content: "";
+    height: 2px;
+    width: 0;
+    background-color: red;
+    transition: width .3s ease-in-out;
+}
+
+.contacts__items li a:hover:after,
+.contacts__items li a:focus:after {
+    width: 100%;
+}
+
+#sign-up, #cart {
+    margin-right: 20px;
+}
+
+#sign-up a, #cart a {
+    color: black;
+    font-size: 14pt;
+}
