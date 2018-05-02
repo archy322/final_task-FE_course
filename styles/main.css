@@ -1,0 +1,111 @@
+@font-face {
+    font-family: "FuturaPTDemi";
+    src: url("../fonts/FuturaPTDemi.otf");
+}
+
+@font-face {
+    font-family: "FuturaPTHeavy";
+    src: url("../fonts/FuturaPTHeavy.otf");
+}
+
+@font-face {
+    font-family: "HelveticaNeue-Bold";
+    src: url("../fonts/HelveticaNeue-Bold.ttf");
+}
+
+@font-face {
+    font-family: "HelveticaNeue";
+    src: url("../fonts/HelveticaNeue.ttf");
+}
+
+html, body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.page-wrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+#header{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    border-bottom: 2px solid black;
+    background: white;
+    font-family: "HelveticaNeue", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+#menuToggle{
+    display: none;
+}
+#logo img{
+    width: 200px;
+    height: 70px;
+    margin: 10px 0 15px 15px;
+}
+.menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 900px;
+}
+#menu .menu li{
+    display: inline-block;
+    font-size:16pt;
+}
+#menu .menu li a:after {
+    display: block;
+    content: "";
+    height: 2px;
+    width: 0;
+    background-color: red;
+    transition: width .3s ease-in-out;
+}
+#menu .menu li a:hover:after,
+#menu .menu li a:focus:after {
+    width: 100%;
+}
+#menu .menu li a{
+    text-decoration: none;
+    color: black;
+}
+
+.contactsList{
+    list-style: none;
+    margin-right: 20px;
+}
+.contactsList li:last-child{
+    margin-top: 10px ;
+}
+.contactsList a{
+    text-decoration: none;
+    color: black;
+    font-size: 14pt;
+    font-weight: bold;
+}
+.contactsList li a:after {
+    display: block;
+    content: "";
+    height: 2px;
+    width: 0;
+    background-color: red;
+    transition: width .3s ease-in-out;
+}
+.contactsList li a:hover:after,
+.contactsList li a:focus:after {
+    width: 100%;
+}
+#sign-up, #cart{
+    margin-right: 20px;
+}
+#sign-up a, #cart a{
+    color: black;
+    font-size: 14pt;
+}
