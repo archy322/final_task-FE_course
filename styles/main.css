@@ -54,19 +54,19 @@ html, body {
     margin: 10px 0 15px 15px;
 }
 
-.menu {
+.header__menu__items {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 900px;
 }
 
-#menu .menu li {
+#menu .header__menu__items li {
     display: inline-block;
     font-size: 16pt;
 }
 
-#menu .menu li a:after {
+#menu .header__menu__items li a:after {
     display: block;
     content: "";
     height: 2px;
@@ -75,33 +75,33 @@ html, body {
     transition: width .3s ease-in-out;
 }
 
-#menu .menu li a:hover:after,
-#menu .menu li a:focus:after {
+#menu .header__menu__items li a:hover:after,
+#menu .header__menu__items li a:focus:after {
     width: 100%;
 }
 
-#menu .menu li a {
+#menu .header__menu__items li a {
     text-decoration: none;
     color: black;
 }
 
-.contactsList {
+.contacts__items {
     list-style: none;
     margin-right: 20px;
 }
 
-.contactsList li:last-child {
+.contacts__items li:last-child {
     margin-top: 10px;
 }
 
-.contactsList a {
+.contacts__items a {
     text-decoration: none;
     color: black;
     font-size: 14pt;
     font-weight: bold;
 }
 
-.contactsList li a:after {
+.contacts__items li a:after {
     display: block;
     content: "";
     height: 2px;
@@ -110,8 +110,8 @@ html, body {
     transition: width .3s ease-in-out;
 }
 
-.contactsList li a:hover:after,
-.contactsList li a:focus:after {
+.contacts__items li a:hover:after,
+.contacts__items li a:focus:after {
     width: 100%;
 }
 
