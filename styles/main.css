@@ -18,19 +18,20 @@
     src: url("../fonts/HelveticaNeue.ttf");
 }
 
-html, body{
+html, body {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
 }
 
-.page-wrapper{
+.page-wrapper {
     position: relative;
     width: 100%;
     height: 100%;
 }
-#header{
+
+#header {
     position: relative;
     width: 100%;
     height: 100px;
@@ -42,24 +43,29 @@ html, body{
     align-items: center;
     flex-direction: row;
 }
-#menuToggle{
+
+#menuToggle {
     display: none;
 }
-#logo img{
+
+#logo img {
     width: 200px;
     height: 70px;
     margin: 10px 0 15px 15px;
 }
-.menu{
+
+.menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 900px;
 }
-#menu .menu li{
+
+#menu .menu li {
     display: inline-block;
-    font-size:16pt;
+    font-size: 16pt;
 }
+
 #menu .menu li a:after {
     display: block;
     content: "";
@@ -68,28 +74,33 @@ html, body{
     background-color: red;
     transition: width .3s ease-in-out;
 }
+
 #menu .menu li a:hover:after,
 #menu .menu li a:focus:after {
     width: 100%;
 }
-#menu .menu li a{
+
+#menu .menu li a {
     text-decoration: none;
     color: black;
 }
 
-.contactsList{
+.contactsList {
     list-style: none;
     margin-right: 20px;
 }
-.contactsList li:last-child{
-    margin-top: 10px ;
+
+.contactsList li:last-child {
+    margin-top: 10px;
 }
-.contactsList a{
+
+.contactsList a {
     text-decoration: none;
     color: black;
     font-size: 14pt;
     font-weight: bold;
 }
+
 .contactsList li a:after {
     display: block;
     content: "";
@@ -98,14 +109,17 @@ html, body{
     background-color: red;
     transition: width .3s ease-in-out;
 }
+
 .contactsList li a:hover:after,
 .contactsList li a:focus:after {
     width: 100%;
 }
-#sign-up, #cart{
+
+#sign-up, #cart {
     margin-right: 20px;
 }
-#sign-up a, #cart a{
+
+#sign-up a, #cart a {
     color: black;
     font-size: 14pt;
 }
