@@ -2,29 +2,35 @@
     font-family: "FuturaPTDemi";
     src: url("../fonts/FuturaPTDemi.otf");
 }
+
 @font-face {
     font-family: "FuturaPTHeavy";
     src: url("../fonts/FuturaPTHeavy.otf");
 }
+
 @font-face {
     font-family: "HelveticaNeue-Bold";
     src: url("../fonts/HelveticaNeue-Bold.ttf");
 }
+
 @font-face {
     font-family: "HelveticaNeue";
     src: url("../fonts/HelveticaNeue.ttf");
 }
+
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
 }
+
 .page-wrapper {
     position: relative;
     width: 100%;
     height: 100%;
 }
+
 #header {
     position: relative;
     width: 100%;
@@ -37,16 +43,19 @@ html, body {
     align-items: center;
     flex-direction: row;
 }
+
 .header__menu__items {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 900px;
 }
+
 #menu .header__menu__items li {
     display: inline-block;
     font-size: 16pt;
 }
+
 #menu .header__menu__items li a:after {
     display: block;
     content: "";
@@ -55,18 +64,22 @@ html, body {
     background-color: red;
     transition: width .3s ease-in-out;
 }
+
 #menu .header__menu__items li a:hover:after,
 #menu .header__menu__items li a:focus:after {
     width: 100%;
 }
+
 #menu .header__menu__items li a {
     text-decoration: none;
     color: black;
 }
+
 .contacts__items {
     list-style: none;
     margin-right: 20px;
 }
+
 .contacts__items li:last-child {
     margin-top: 10px;
 }
@@ -76,6 +89,7 @@ html, body {
     font-size: 14pt;
     font-weight: bold;
 }
+
 .contacts__items li a:after {
     display: block;
     content: "";
@@ -84,30 +98,37 @@ html, body {
     background-color: red;
     transition: width .3s ease-in-out;
 }
+
 .contacts__items li a:hover:after,
 .contacts__items li a:focus:after {
     width: 100%;
 }
+
 #sign-up, #cart {
     margin-right: 20px;
 }
+
 #sign-up a, #cart a {
     color: black;
     font-size: 14pt;
 }
+
 #white-logo img {
     width: 200px;
     height: 70px;
     margin: 10px 0 15px 15px;
 }
+
 #menu-toggle {
     display: none;
 }
+
 #logo img {
     width: 200px;
     height: 70px;
     margin: 10px 0 15px 15px;
 }
+
 #footer {
     position: relative;
     width: 100%;
@@ -117,12 +138,14 @@ html, body {
     display: flex;
     justify-content: space-around;
 }
+
 .footer__menu {
     font-size: 12pt;
     align-self: flex-start;
     width: 600px;
     height: 100px;
 }
+
 .footer__menu__categories {
     display: flex;
     justify-content: center;
@@ -130,6 +153,7 @@ html, body {
     margin: 0;
     box-sizing: content-box;
 }
+
 .footer__menu__categories > li {
     display: inline-block;
     height: 100px;
@@ -139,15 +163,18 @@ html, body {
 .footer__menu__categories li {
     list-style: none;
 }
+
 .footer__menu__categories > li ul > li:first-child {
     font-weight: bolder;
     font-size: 13pt;
     color: white;
 }
+
 .footer__menu__categories a {
     color: white;
     text-decoration: none;
 }
+
 #copy {
     color: white;
     font-weight: bold;
