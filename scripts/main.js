@@ -94,3 +94,35 @@ class LocalStorageService extends WebStorage {
         localStorage.clear();
     }
 }
+
+/*SessionStorageService is a child class,
+* that extends and overwrites methods from
+* our abstract class - WebStorage. This class
+* clones our LocalStorageService and overrides its
+* methods for engaging sessionStorage.*/
+
+class SessionStorageService extends WebStorage {
+    write(key, value) {
+        sessionStorage.setItem(key, value)
+    }
+
+    read(key) {
+        return sessionStorage.getItem(key)
+    }
+
+    writeObject(key, value) {
+        sessionStorage.setItem(key, JSON.stringify(value));
+    }
+
+    readObject(key) {
+        return JSON.parse(sessionStorage.getItem(key));
+    }
+
+    removeObject(key) {
+        sessionStorage.removeItem(key);
+    }
+
+    clear() {
+        sessionStorage.clear();
+    }
+}
