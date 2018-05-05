@@ -119,9 +119,6 @@ class SessionStorageService extends WebStorage {
     }
 
     removeObject(key) {
-        if (!sessionStorage.getItem(key)) {
-            throw new TypeError("There is no item with such key in localStorage");
-        }
         sessionStorage.removeItem(key);
     }
 
