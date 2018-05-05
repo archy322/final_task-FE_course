@@ -9,26 +9,51 @@ class WebStorage {
         }
     }
 
-    write() {
+    /*
+    * {Method 'write' adds a key-value pair to our webStorage, returns nothing}
+    * {key} - its a string value which would sets as key for having access to relevant value.
+    * {value} - its a primitive data type(string, number, boolean, undefined, null) or array which will be available
+    * by the relevant key.
+    */
+    write(key, value) {
         throw new TypeError("Do not call abstract method getProduct from child.");
     }
 
-    read() {
+    /*
+    * {Method 'read' takes a key and returns value that relevant to this key in our storage}
+    * {key} - its a string value which would sets as key for having access to relevant value.
+    * {returns} - returns primitive data type(string, number, boolean, undefined, null) or array which is relevant to
+    *  the key.
+    */
+    read(key) {
         throw new TypeError("Do not call abstract method getProduct from child.");
     }
-
-    writeObj() {
+    /*
+    * {Method 'writeObject' adds a key-value pair to our webStorage, returns nothing}
+    * {key} - its a string value which would sets as key for having access to relevant value.
+    * {value} - its an Object which will be turns into string by JSON.stringify, and added to our storage.
+    */
+    writeObject(key, value) {
         throw new TypeError("Do not call abstract method getProduct from child.");
     }
-
-    readObj() {
+    /*
+    * {Method 'readObject' takes a key and returns Object that relevant to this key in our storage}
+    * {key} - its a string value which would sets as key for having access to relevant value.
+    * {returns} - returns Object which will be parsed from string by JSON.parse.
+    */
+    readObject(key) {
         throw new TypeError("Do not call abstract method getProduct from child.");
     }
-
-    removeObj() {
+    /*
+    * {Method 'removeObject' takes a key, and removes relevant value from our storage, returns nothing}
+    * {key} - its a string value which would sets as key for having access to relevant value.
+    */
+    removeObject(key) {
         throw new TypeError("Do not call abstract method getProduct from child.");
     }
-
+    /*
+    * {Method 'clear' removes all values from our storage and lets it empty, returns nothing}
+    */
     clear() {
         throw new TypeError("Do not call abstract method getProduct from child.");
     }
