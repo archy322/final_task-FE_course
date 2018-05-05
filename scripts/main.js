@@ -45,12 +45,13 @@ class LocalStorageService extends WebStorage {
         super();
     }
 
+
     write(key, value) {
         localStorage.setItem(key, value)
     }
 
     read(key) {
-     return localStorage.getItem(key)
+        return localStorage.getItem(key)
     }
 
     writeObj(key, value) {
@@ -58,9 +59,6 @@ class LocalStorageService extends WebStorage {
     }
 
     readObj(key) {
-        if (!localStorage.getItem(key)) {
-            throw new TypeError("There is no item with such key in localStorage");
-        }
         return JSON.parse(localStorage.getItem(key));
     }
 
