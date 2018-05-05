@@ -28,6 +28,7 @@ class WebStorage {
     read(key) {
         throw new TypeError("Do not call abstract method read from child.");
     }
+
     /*
     * Adds a key-value pair to our webStorage, returns nothing
     * key - its a string value which would sets as key for having access to relevant value.
@@ -36,6 +37,7 @@ class WebStorage {
     writeObject(key, value) {
         throw new TypeError("Do not call abstract method writeObject from child.");
     }
+
     /*
     * Takes a key and returns Object that relevant to this key in our storage
     * key - its a string value which would sets as key for having access to relevant value.
@@ -44,6 +46,7 @@ class WebStorage {
     readObject(key) {
         throw new TypeError("Do not call abstract method readObject from child.");
     }
+
     /*
     * Takes a key, and removes relevant value from our storage, returns nothing
     * key - its a string value which would sets as key for having access to relevant value.
@@ -51,6 +54,7 @@ class WebStorage {
     removeObject(key) {
         throw new TypeError("Do not call abstract method removeObject from child.");
     }
+
     /*
     * Removes all values from our storage and lets it empty, returns nothing
     */
@@ -66,10 +70,6 @@ class WebStorage {
 * localStorage methods*/
 
 class LocalStorageService extends WebStorage {
-    constructor() {
-        super();
-    }
-
     write(key, value) {
         localStorage.setItem(key, value)
     }
