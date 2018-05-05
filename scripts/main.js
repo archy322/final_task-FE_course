@@ -45,7 +45,6 @@ class LocalStorageService extends WebStorage {
         super();
     }
 
-
     write(key, value) {
         localStorage.setItem(key, value)
     }
