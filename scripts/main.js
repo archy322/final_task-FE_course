@@ -22,7 +22,7 @@ class WebStorage {
     /*
     * Takes a key and returns value that relevant to this key in our storage
     * key - its a string value which would sets as key for having access to relevant value.
-    * returns - returns primitive data type(string, number, boolean, undefined, null) or array which is relevant to
+    * returns primitive data type(string, number, boolean, undefined, null) or array which is relevant to
     *  the key.
     */
     read(key) {
@@ -39,7 +39,7 @@ class WebStorage {
     /*
     * Takes a key and returns Object that relevant to this key in our storage
     * key - its a string value which would sets as key for having access to relevant value.
-    * returns - returns Object which will be parsed from string by JSON.parse.
+    * returns Object which will be parsed from string by JSON.parse.
     */
     readObject(key) {
         throw new TypeError("Do not call abstract method readObject from child.");
