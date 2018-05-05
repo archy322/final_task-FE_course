@@ -44,16 +44,6 @@ html, body {
     flex-direction: row;
 }
 
-#menu-toggle {
-    display: none;
-}
-
-#logo img {
-    width: 200px;
-    height: 70px;
-    margin: 10px 0 15px 15px;
-}
-
 .header__menu__items {
     display: flex;
     justify-content: space-between;
@@ -93,7 +83,6 @@ html, body {
 .contacts__items li:last-child {
     margin-top: 10px;
 }
-
 .contacts__items a {
     text-decoration: none;
     color: black;
@@ -122,4 +111,73 @@ html, body {
 #sign-up a, #cart a {
     color: black;
     font-size: 14pt;
+}
+
+#white-logo img {
+    width: 200px;
+    height: 70px;
+    margin: 10px 0 15px 15px;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+#logo img {
+    width: 200px;
+    height: 70px;
+    margin: 10px 0 15px 15px;
+}
+
+#footer {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    background: red;
+    font-family: "HelveticaNeue", sans-serif;
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer__menu {
+    font-size: 12pt;
+    align-self: flex-start;
+    width: 600px;
+    height: 100px;
+}
+
+.footer__menu__categories {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0;
+    box-sizing: content-box;
+}
+
+.footer__menu__categories > li {
+    display: inline-block;
+    height: 100px;
+    margin: 0 20px 0 20px;
+}
+
+.footer__menu__categories li {
+    list-style: none;
+}
+
+.footer__menu__categories > li ul > li:first-child {
+    font-weight: bolder;
+    font-size: 13pt;
+    color: white;
+}
+
+.footer__menu__categories a {
+    color: white;
+    text-decoration: none;
+}
+
+#copy {
+    color: white;
+    font-weight: bold;
+    font-size: 12pt;
+    margin-right: 20px;
 }
