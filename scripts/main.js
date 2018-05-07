@@ -131,10 +131,6 @@ class SessionStorageService extends WebStorage {
 requests and engage with APIs,*/
 
 class Network {
-    constructor() {
-        this.request = new XMLHttpRequest();
-    }
-
     /*
     * Takes  html method, url, data for body(if you send PUT or POST methods) and boolean argument async for
     * sending synchrone or asynchrone request.
@@ -144,8 +140,8 @@ class Network {
     * async - its Boolean which is true by default, if yo set anything but not false in async value, it will sets on true.
     * returns Promise which will resolve your response or reject your error.
     */
-    send(method, url, data, async = true) {
-        const request = this.request;
+    send(method, url, data, async) {
+        const request = new XMLHttpRequest();
 
         if (typeof async !== "boolean") {
             async = true;
