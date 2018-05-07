@@ -126,3 +126,40 @@ class SessionStorageService extends WebStorage {
         sessionStorage.clear();
     }
 }
+
+/*Network is a service for sending
+requests and engage with APIs,*/
+
+class Network {
+    /*
+    * Takes  html method, url, data for body(if you send PUT or POST methods) and boolean argument async for
+    * sending synchrone or asynchrone request.
+    * method - its a string value which would sets as a GET/POST/PUT/DELETE/PATCH/HEAD method in your request.
+    * url - its a string value which would sets as url address link in your request.
+    * data - its an Object which will be turns in string by JSON.stringify and used as body of your request.
+    * async - its Boolean which is true by default, if yo set anything but not false in async value, it will sets on true.
+    * returns Promise which will resolve your response or reject your error.
+    */
+    send(method, url, data, async) {
+        const request = new XMLHttpRequest();
+
+        if (typeof async !== "boolean") {
+            async = true;
+        }
+
+        return new Promise((resolve, reject) => {
+            request.open(method, url, async);
+            if (method === "POST" || method === "PUT") {
+                request.send(JSON.stringify(data))
+            } else {
+                request.send();
+            }
+            if (request.status !== 200) {
+                reject(request.status + ': ' + request.statusText);
+            } else {
+                resolve(request.responseText);
+            }
+        });
+
+    }
+}
