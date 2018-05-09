@@ -127,11 +127,11 @@ class SessionStorageService extends WebStorage {
     }
 }
 
-/*Network is a service for sending
+/**Network is a service for sending
 requests and engage with APIs,*/
 
 class Network {
-    /*
+    /**
     * Takes  html method, url, data for body(if you send PUT or POST methods) and boolean argument async for
     * sending synchrone or asynchrone request.
     * method - its a string value which would sets as a GET/POST/PUT/DELETE/PATCH/HEAD method in your request.
@@ -161,5 +161,64 @@ class Network {
             }
         });
 
+    }
+}
+
+/**ProductModel is a model that stores
+Products data.
+* id - unique number for identification.
+* name - string with product's name.
+* price - number, stores product's cost.
+* desc - string, stores product's description.
+* desc - string, stores product's image's source path.
+* all properties have getters and setters
+* */
+class ProductModel {
+    constructor() {
+        this.id = null;
+        this.name = null;
+        this.price = null;
+        this.desc = null;
+        this.img = null;
+    }
+
+    setId(id) {
+        this.id = id;
+    }
+
+    getId() {
+        return this.id;
+    }
+
+    setName(name) {
+        this.name = name;
+    }
+
+    getName() {
+        return this.name;
+    }
+
+    setPrice(price) {
+        this.price = price;
+    }
+
+    getPrice() {
+        return this.price;
+    }
+
+    setDesc(desc) {
+        this.desc = desc;
+    }
+
+    getDesk() {
+        return this.desc;
+    }
+
+    setImg(img) {
+        this.img = img;
+    }
+
+    getImg() {
+        return this.img;
     }
 }
