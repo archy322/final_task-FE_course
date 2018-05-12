@@ -1,4 +1,4 @@
-/*WebStorage is an abstract class
+/**WebStorage is an abstract class
 for extending our local and session
 storage services*/
 
@@ -9,7 +9,7 @@ class WebStorage {
         }
     }
 
-    /*
+    /**
     *Adds a key-value pair to our webStorage, returns nothing
     * key - its a string value which would sets as key for having access to relevant value.
     * value - its a primitive data type(string, number, boolean, undefined, null) or array which will be available
@@ -19,7 +19,7 @@ class WebStorage {
         throw new TypeError("Do not call abstract method write from child.");
     }
 
-    /*
+    /**
     * Takes a key and returns value that relevant to this key in our storage
     * key - its a string value which would sets as key for having access to relevant value.
     * returns primitive data type(string, number, boolean, undefined, null) or array which is relevant to
@@ -29,7 +29,7 @@ class WebStorage {
         throw new TypeError("Do not call abstract method read from child.");
     }
 
-    /*
+    /**
     * Adds a key-value pair to our webStorage, returns nothing
     * key - its a string value which would sets as key for having access to relevant value.
     * value - its an Object which will be turns into string by JSON.stringify, and added to our storage.
@@ -38,7 +38,7 @@ class WebStorage {
         throw new TypeError("Do not call abstract method writeObject from child.");
     }
 
-    /*
+    /**
     * Takes a key and returns Object that relevant to this key in our storage
     * key - its a string value which would sets as key for having access to relevant value.
     * returns Object which will be parsed from string by JSON.parse.
@@ -47,7 +47,7 @@ class WebStorage {
         throw new TypeError("Do not call abstract method readObject from child.");
     }
 
-    /*
+    /**
     * Takes a key, and removes relevant value from our storage, returns nothing
     * key - its a string value which would sets as key for having access to relevant value.
     */
@@ -55,7 +55,7 @@ class WebStorage {
         throw new TypeError("Do not call abstract method removeObject from child.");
     }
 
-    /*
+    /**
     * Removes all values from our storage and lets it empty, returns nothing
     */
     clear() {
@@ -63,7 +63,7 @@ class WebStorage {
     }
 }
 
-/*LocalStorageService is a child class,
+/**LocalStorageService is a child class,
 * that extends and overwrites methods from
 * our abstract class - WebStorage. This class
 * is actually just a wrapper for native
@@ -95,7 +95,7 @@ class LocalStorageService extends WebStorage {
     }
 }
 
-/*SessionStorageService is a child class,
+/**SessionStorageService is a child class,
 * that extends and overwrites methods from
 * our abstract class - WebStorage. This class
 * clones our LocalStorageService and overrides its
