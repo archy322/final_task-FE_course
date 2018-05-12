@@ -176,51 +176,61 @@ class Network {
  * */
 class ProductModel {
     constructor() {
-        this.id = null;
-        this.name = null;
-        this.price = null;
-        this.desc = null;
-        this.img = null;
+        this._id = null;
+        this._name = null;
+        this._price = null;
+        this._desc = null;
+        this._img = null;
+        this._amount = 1;
     }
 
-    setId(id) {
-        this.id = id;
+
+    get id() {
+        return this._id;
     }
 
-    getId() {
-        return this.id;
+    set id(value) {
+        this._id = value;
     }
 
-    setName(name) {
-        this.name = name;
+    get name() {
+        return this._name;
     }
 
-    getName() {
-        return this.name;
+    set name(value) {
+        this._name = value;
     }
 
-    setPrice(price) {
-        this.price = price;
+    get price() {
+        return this._price;
     }
 
-    getPrice() {
-        return this.price;
+    set price(value) {
+        this._price = value;
     }
 
-    setDesc(desc) {
-        this.desc = desc;
+    get desc() {
+        return this._desc;
     }
 
-    getDesk() {
-        return this.desc;
+    set desc(value) {
+        this._desc = value;
     }
 
-    setImg(img) {
-        this.img = img;
+    get img() {
+        return this._img;
     }
 
-    getImg() {
-        return this.img;
+    set img(value) {
+        this._img = value;
+    }
+
+    get amount() {
+        return this._amount;
+    }
+
+    set amount(value) {
+        this._amount = value;
     }
 }
 
