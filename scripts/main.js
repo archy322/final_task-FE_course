@@ -236,10 +236,11 @@ class ProductModel {
     static createFromObject(object) {
         let product = new ProductModel();
         for (let property in product) {
-            if (!object[property]) {
-                return null;
+            try {
+                product[property] = object[property];
+            } catch (e) {
+                console.log(`${property} doesn't exist`)
             }
-            product[property] = object[property];
         }
         return product;
     }
@@ -260,7 +261,7 @@ class Cart {
         let products = this.read();
         let cartProduct = products.find(item => item._name === product._name);
 
-        if (cartProduct) {
+        if (cartProduct !== undefined) {
             cartProduct._amount++;
         } else {
             products.push(product);
@@ -273,14 +274,17 @@ class Cart {
      * product - is an object, that must be instance of ProductModel*/
     removeProduct(product, allAmount) {
         let products = this.read();
+
         if (allAmount) {
             products = products.filter(item => item._name !== product._name);
-        }else {
-            products = products.map(item => {
-                if (item._name === product._name){
-                    item._amount--;
-                }
-            })
+        } else {
+            let cartProduct = products.find(item => item._name === product._name);
+            if (cartProduct._amount > 1) {
+                cartProduct._amount--;
+            } else {
+                products = products.filter(item => item._name !== product._name);
+            }
+
         }
         this.storage.writeObject(this.cartKey, products);
 
@@ -291,11 +295,25 @@ class Cart {
         let products = this.storage.readObject(this.cartKey);
         if (!products) {
             return [];
+        } else {
+            return products.map(object => ProductModel.createFromObject(object));
         }
-        return products.map(object => ProductModel.createFromObject(object)).filter(product => product !== null);
     }
 
     clear() {
         this.storage.clear();
     }
 }
+
+const cart = new Cart();
+let prod = new ProductModel();
+
+prod.name = "Alex";
+console.log(prod !== null)
+cart.addProduct(prod);
+
+console.log(cart.read());
+cart.removeProduct(prod, false);
+// console.log(cart.read());
+// cart.removeProduct(prod, true);
+console.log(cart.read());
