@@ -232,6 +232,14 @@ class ProductModel {
     set amount(value) {
         this._amount = value;
     }
+
+    serialize(){
+        return JSON.stringify(this);
+    }
+
+    deserialize(){
+        return JSON.parse(this.serialize());
+    }
 }
 
 /**Cart works with localStorage throw LocalStorageService,
@@ -263,7 +271,7 @@ class Cart {
     removeProduct(product) {
         let products = this.read();
 
-        products = products.filter(item => item.name !== product.name);
+        products = products.filter(item => item._name !== product._name);
         this.storage.writeObject(this.cartKey, products);
 
     }
