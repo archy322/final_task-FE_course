@@ -304,16 +304,3 @@ class Cart {
         this.storage.clear();
     }
 }
-
-const cart = new Cart();
-let prod = new ProductModel();
-
-prod.name = "Alex";
-console.log(prod !== null)
-cart.addProduct(prod);
-
-console.log(cart.read());
-cart.removeProduct(prod, false);
-// console.log(cart.read());
-// cart.removeProduct(prod, true);
-console.log(cart.read());
