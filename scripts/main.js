@@ -233,12 +233,15 @@ class ProductModel {
         this._amount = value;
     }
 
-    serialize(){
-        return JSON.stringify(this);
-    }
-
-    deserialize(){
-        return JSON.parse(this.serialize());
+    static createFromObject(object) {
+        let product = new ProductModel();
+        for (let property in product) {
+            if (!object[property]) {
+                return null;
+            }
+            product[property] = object[property];
+        }
+        return product;
     }
 }
 
@@ -255,29 +258,44 @@ class Cart {
      * product - is an object, that must be instance of ProductModel*/
     addProduct(product) {
         let products = this.read();
-        if (!products) {
-            products = [];
-        }
-        if (!(product instanceof ProductModel)) {
-            console.log("Access denied. Incorrect product type.");
+        let cartProduct = products.find(item => item._name === product._name);
+
+        if (cartProduct) {
+            cartProduct._amount++;
         } else {
             products.push(product);
         }
+
         this.storage.writeObject(this.cartKey, products);
     }
 
     /**Takes an object, remove from array of products all suggestions of it.
      * product - is an object, that must be instance of ProductModel*/
-    removeProduct(product) {
+    removeProduct(product, allAmount) {
         let products = this.read();
-
-        products = products.filter(item => item._name !== product._name);
+        if (allAmount) {
+            products = products.filter(item => item._name !== product._name);
+        }else {
+            products = products.map(item => {
+                if (item._name === product._name){
+                    item._amount--;
+                }
+            })
+        }
         this.storage.writeObject(this.cartKey, products);
 
     }
 
     /**Returns our array of objects in localStorage*/
     read() {
-        return this.storage.readObject(this.cartKey);
+        let products = this.storage.readObject(this.cartKey);
+        if (!products) {
+            return [];
+        }
+        return products.map(object => ProductModel.createFromObject(object)).filter(product => product !== null);
+    }
+
+    clear() {
+        this.storage.clear();
     }
 }
