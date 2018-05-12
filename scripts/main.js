@@ -126,3 +126,40 @@ class SessionStorageService extends WebStorage {
         sessionStorage.clear();
     }
 }
+
+/**Cart works with localStorage throw LocalStorageService,
+ * and writes array of ProductModel's instances into it*/
+class Cart {
+    constructor() {
+        this.storage = new LocalStorageService();
+        this.cartKey = 'CART';
+    }
+    /**Takes an object, checks if it instance of ProductModel,
+     * and adds it to array of our products
+     * product - is an object, that must be instance of ProductModel*/
+    addProduct(product) {
+        let products = this.read();
+        if (!products) {
+            products = [];
+        }
+        if (!(product instanceof ProductModel)) {
+            console.log("Access denied. Incorrect product type.");
+        } else {
+            products.push(product);
+        }
+        this.storage.writeObject(this.cartKey, products);
+    }
+    /**Takes an object, remove from array of products all suggestions of it.
+     * product - is an object, that must be instance of ProductModel*/
+    removeProduct(product) {
+        let products = this.read();
+
+        products = products.filter(item => item.name !== product.name);
+        this.storage.writeObject(this.cartKey, products);
+
+    }
+    /**Returns our array of objects in localStorage*/
+    read() {
+        return this.storage.readObject(this.cartKey);
+    }
+}
