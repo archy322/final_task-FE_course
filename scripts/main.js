@@ -176,51 +176,23 @@ class Network {
  * */
 class ProductModel {
     constructor() {
-        this.id = null;
-        this.name = null;
-        this.price = null;
-        this.desc = null;
-        this.img = null;
+        this._id = null;
+        this._name = null;
+        this._price = null;
+        this._desc = null;
+        this._img = null;
+        this._amount = 1;
     }
 
-    setId(id) {
-        this.id = id;
-    }
-
-    getId() {
-        return this.id;
-    }
-
-    setName(name) {
-        this.name = name;
-    }
-
-    getName() {
-        return this.name;
-    }
-
-    setPrice(price) {
-        this.price = price;
-    }
-
-    getPrice() {
-        return this.price;
-    }
-
-    setDesc(desc) {
-        this.desc = desc;
-    }
-
-    getDesk() {
-        return this.desc;
-    }
-
-    setImg(img) {
-        this.img = img;
-    }
-
-    getImg() {
-        return this.img;
+    static createFromObject(object) {
+        let product = new ProductModel();
+        for (let propertyName in product) {
+            if (!object[propertyName]) {
+                return null;
+            }
+            product[propertyName] = object[propertyName];
+        }
+        return product;
     }
 }
 
@@ -237,14 +209,14 @@ class Cart {
      * product - is an object, that must be instance of ProductModel*/
     addProduct(product) {
         let products = this.read();
-        if (!products) {
-            products = [];
-        }
-        if (!(product instanceof ProductModel)) {
-            console.log("Access denied. Incorrect product type.");
+        let cartProduct = products.find(it => it._name === product._name);
+
+        if (cartProduct) {
+            cartProduct._amount += 1;
         } else {
             products.push(product);
         }
+
         this.storage.writeObject(this.cartKey, products);
     }
 
@@ -253,13 +225,16 @@ class Cart {
     removeProduct(product) {
         let products = this.read();
 
-        products = products.filter(item => item.name !== product.name);
+        products = products.filter(item => item._name !== product._name);
         this.storage.writeObject(this.cartKey, products);
-
     }
 
     /**Returns our array of objects in localStorage*/
     read() {
-        return this.storage.readObject(this.cartKey);
+        let products = this.storage.readObject(this.cartKey);
+        if (!products) {
+            return [];
+        }
+        return products.map(object => ProductModel.createFromObject(object)).filter(product => product !== null);
     }
 }
