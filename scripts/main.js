@@ -236,11 +236,10 @@ class ProductModel {
     static createFromObject(object) {
         let product = new ProductModel();
         for (let property in product) {
-            try {
-                product[property] = object[property];
-            } catch (e) {
-                console.log(`${property} doesn't exist`)
+            if (!object.hasOwnProperty(property)) {
                 return null;
+            } else {
+                product[property] = object[property];
             }
         }
         return product;
@@ -260,12 +259,14 @@ class Cart {
      * product - is an object, that must be instance of ProductModel*/
     addProduct(product) {
         let products = this.read();
-        let cartProduct = products.find(item => item._name === product._name);
+        if (product instanceof ProductModel) {
+            let cartProduct = products.find(item => item._name === product._name);
 
-        if (cartProduct !== undefined) {
-            cartProduct._amount++;
-        } else {
-            products.push(product);
+            if (cartProduct !== undefined) {
+                cartProduct._amount++;
+            } else {
+                products.push(product);
+            }
         }
 
         this.storage.writeObject(this.cartKey, products);
@@ -275,17 +276,12 @@ class Cart {
      * product - is an object, that must be instance of ProductModel*/
     removeProduct(product, allAmount) {
         let products = this.read();
+        let cartProduct = products.find(item => item._name === product._name);
 
-        if (allAmount) {
-            products = products.filter(item => item._name !== product._name);
+        if (!allAmount && cartProduct !== undefined && cartProduct._amount > 1) {
+            cartProduct._amount--;
         } else {
-            let cartProduct = products.find(item => item._name === product._name);
-            if (cartProduct._amount > 1) {
-                cartProduct._amount--;
-            } else {
-                products = products.filter(item => item._name !== product._name);
-            }
-
+            products = products.filter(item => item._name !== product._name);
         }
         this.storage.writeObject(this.cartKey, products);
 
