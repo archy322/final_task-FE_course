@@ -240,6 +240,7 @@ class ProductModel {
                 product[property] = object[property];
             } catch (e) {
                 console.log(`${property} doesn't exist`)
+                return null;
             }
         }
         return product;
@@ -296,7 +297,7 @@ class Cart {
         if (!products) {
             return [];
         } else {
-            return products.map(object => ProductModel.createFromObject(object));
+            return products.map(object => ProductModel.createFromObject(object)).filter(product => product !== null);
         }
     }
 
