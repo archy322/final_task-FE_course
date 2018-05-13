@@ -276,16 +276,17 @@ class Cart {
     /**Takes an object, remove from array of products all suggestions of it.
      * product - is an object, that must be instance of ProductModel*/
     removeProduct(product, allAmount) {
-        let products = this.read();
-        let cartProduct = products.find(item => item._name === product._name);
+        if (product instanceof ProductModel) {
+            let products = this.read();
+            let cartProduct = products.find(item => item._name === product._name);
 
-        if (!allAmount && cartProduct !== undefined && cartProduct._amount > 1) {
-            cartProduct._amount--;
-        } else {
-            products = products.filter(item => item._name !== product._name);
+            if (!allAmount && cartProduct !== undefined && cartProduct._amount > 1) {
+                cartProduct._amount--;
+            } else {
+                products = products.filter(item => item._name !== product._name);
+            }
+            this.storage.writeObject(this.cartKey, products);
         }
-        this.storage.writeObject(this.cartKey, products);
-
     }
 
     /**Returns our array of objects in localStorage*/
