@@ -258,8 +258,8 @@ class Cart {
      * and adds it to array of our products
      * product - is an object, that must be instance of ProductModel*/
     addProduct(product) {
-        let products = this.read();
         if (product instanceof ProductModel) {
+            let products = this.read();
             let cartProduct = products.find(item => item._name === product._name);
 
             if (cartProduct !== undefined) {
@@ -267,9 +267,10 @@ class Cart {
             } else {
                 products.push(product);
             }
+            this.storage.writeObject(this.cartKey, products);
         }
 
-        this.storage.writeObject(this.cartKey, products);
+
     }
 
     /**Takes an object, remove from array of products all suggestions of it.
