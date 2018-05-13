@@ -195,6 +195,21 @@ html, body {
     border-bottom: red;
 }
 
+.product__addBtn {
+    background: none;
+    cursor: pointer;
+    border: 2px solid black;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.product__addBtn:hover {
+    border-color: red;
+    color: red;
+}
+
 #footer {
     position: relative;
     width: 100%;

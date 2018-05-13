@@ -303,3 +303,52 @@ class Cart {
         this.storage.clear();
     }
 }
+
+/*Here starts engaging with product's add buttons.
+* I synchronized buttons with Cart, and on click
+* i'm parsing html product into object and create
+* instance of ProductModel with its data.
+* Then i'm adding this instance to localStorage via Cart.*/
+const cart = new Cart();
+const bagCounters = document.getElementById("bag");
+const addBtns = document.getElementsByClassName("product__addBtn");
+
+for (let i = 0; i < addBtns.length; i++) {
+    addBtns[i].addEventListener("click", function () {
+        const parent = this.parentNode;
+        const id = parent.dataset.id;
+        const img = parent
+            .getElementsByClassName("product__img")[0]
+            .getElementsByTagName("img")[0]
+            .getAttribute("src");
+        const name = parent
+            .getElementsByClassName("product__description")[0]
+            .getElementsByClassName("product__description__title")[0].innerText;
+        const price = parent
+            .getElementsByClassName("product__description")[0]
+            .getElementsByClassName("product__description__price")[0].innerText;
+        const desc = parent
+            .getElementsByClassName("product__description")[0]
+            .getElementsByClassName("product__description__text")[0].innerText;
+
+        const currentProduct = new ProductModel();
+
+        currentProduct.id = id;
+        currentProduct.img = img;
+        currentProduct.name = name;
+        currentProduct.price = price;
+        currentProduct.desc = desc;
+
+        cart.addProduct(currentProduct);
+
+        const cartItems = cart.read();
+        let priceCounter = 0;
+        let amountCounter = 0;
+        cartItems.forEach((item) => {
+            priceCounter += parseInt(item._price) * parseInt(item._amount);
+            amountCounter += parseInt(item._amount)
+        });
+
+        bagCounters.innerText = priceCounter + "£ " + "(" + amountCounter + ")";
+    });
+}
