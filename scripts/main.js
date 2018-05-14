@@ -252,12 +252,14 @@ class Cart {
     constructor() {
         this.storage = new LocalStorageService();
         this.cartKey = 'CART';
+        this.cartExpirationLimit =  5000; //7 Days
     }
 
     /**Takes an object, checks if it instance of ProductModel,
      * and adds it to array of our products
      * product - is an object, that must be instance of ProductModel*/
     addProduct(product) {
+        this.isExpired();
         if (product instanceof ProductModel) {
             let products = this.read();
             let cartProduct = products.find(item => item._name === product._name);
@@ -299,7 +301,77 @@ class Cart {
         }
     }
 
-    clear() {
-        this.storage.clear();
+    /**Calculates total cost of cart's products and their amount.
+     * returns project with relevant properties
+     * */
+    calcTotalInfo() {
+        let products = this.read();
+        let priceCounter = 0;
+        let amountCounter = 0;
+        products.forEach((item) => {
+            priceCounter += parseInt(item._price) * parseInt(item._amount);
+            amountCounter += parseInt(item._amount)
+        });
+        return {
+            totalPrice: priceCounter,
+            totalAmount: amountCounter
+        };
     }
+
+    clear() {
+        let products = this.read();
+        this.storage.removeObject(this.cartKey);
+        products.forEach((item) => {
+            this.removeProduct(item, true);
+        });
+    }
+
+    /**Sets expiration time of cart.
+     * Check value of last update of cart in localStorage,
+     * and if it is more than expiration time of cart, which is setted
+     * on 7 days, clears our cart*/
+    isExpired() {
+        const key = "last update";
+        const storageInit = this.storage.read(key);
+
+        if (!storageInit) {
+            this.storage.write(key, +new Date())
+        } else if (+new Date() - storageInit > this.cartExpirationLimit) {
+            this.clear();
+            this.storage.write(key, +new Date())
+        }
+    }
+}
+
+/*Here starts engaging with product's add buttons.
+* I synchronized buttons with Cart, and on click
+* i'm parsing html product into object and create
+* instance of ProductModel with its data.
+* Then i'm adding this instance to localStorage via Cart.*/
+const cart = new Cart();
+const bagCounters = document.getElementById("bag");
+const addBtns = document.getElementsByClassName("product__addBtn");
+
+for (let i = 0; i < addBtns.length; i++) {
+    addBtns[i].addEventListener("click", addToCart);
+}
+
+function addToCart() {
+    const parent = this.parentNode;
+    const id = parent.dataset.id;
+    const img = parent.getElementsByTagName("img")[0].getAttribute("src");
+    const name = parent.getElementsByClassName("product__description__title")[0].innerText;
+    const price = parent.getElementsByClassName("product__description__price")[0].innerText;
+    const desc = parent.getElementsByClassName("product__description__text")[0].innerText;
+    const currentProduct = new ProductModel();
+    currentProduct.id = id;
+    currentProduct.img = img;
+    currentProduct.name = name;
+    currentProduct.price = price;
+    currentProduct.desc = desc;
+
+    cart.addProduct(currentProduct);
+
+    const productsInfo = cart.calcTotalInfo();
+    bagCounters.innerText = productsInfo.totalPrice + "£ " + "(" + productsInfo.totalAmount + ")";
 }
