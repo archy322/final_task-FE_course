@@ -252,14 +252,14 @@ class Cart {
     constructor() {
         this.storage = new LocalStorageService();
         this.cartKey = 'CART';
-        this.cartExpirationLimit = 7 * 24 * 3600 * 1000; //7 Days
+        this.cartExpirationLimit =  5000; //7 Days
     }
 
     /**Takes an object, checks if it instance of ProductModel,
      * and adds it to array of our products
      * product - is an object, that must be instance of ProductModel*/
     addProduct(product) {
-        this.setExpire();
+        this.isExpired();
         if (product instanceof ProductModel) {
             let products = this.read();
             let cartProduct = products.find(item => item._name === product._name);
@@ -330,7 +330,7 @@ class Cart {
      * Check value of last update of cart in localStorage,
      * and if it is more than expiration time of cart, which is setted
      * on 7 days, clears our cart*/
-    setExpire() {
+    isExpired() {
         const key = "last update";
         const storageInit = this.storage.read(key);
 
@@ -338,6 +338,7 @@ class Cart {
             this.storage.write(key, +new Date())
         } else if (+new Date() - storageInit > this.cartExpirationLimit) {
             this.clear();
+            this.storage.write(key, +new Date())
         }
     }
 }
