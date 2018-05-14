@@ -252,12 +252,14 @@ class Cart {
     constructor() {
         this.storage = new LocalStorageService();
         this.cartKey = 'CART';
+        this.cartExpirationLimit = 7 * 24 * 3600 * 1000; //7 Days
     }
 
     /**Takes an object, checks if it instance of ProductModel,
      * and adds it to array of our products
      * product - is an object, that must be instance of ProductModel*/
     addProduct(product) {
+        this.setExpire();
         if (product instanceof ProductModel) {
             let products = this.read();
             let cartProduct = products.find(item => item._name === product._name);
@@ -299,8 +301,44 @@ class Cart {
         }
     }
 
+    /**Calculates total cost of cart's products and their amount.
+     * returns project with relevant properties
+     * */
+    calcTotalInfo() {
+        let products = this.read();
+        let priceCounter = 0;
+        let amountCounter = 0;
+        products.forEach((item) => {
+            priceCounter += parseInt(item._price) * parseInt(item._amount);
+            amountCounter += parseInt(item._amount)
+        });
+        return {
+            totalPrice: priceCounter,
+            totalAmount: amountCounter
+        };
+    }
+
     clear() {
-        this.storage.clear();
+        let products = this.read();
+        this.storage.removeObject(this.cartKey);
+        products.forEach((item) => {
+            this.removeProduct(item, true);
+        });
+    }
+
+    /**Sets expiration time of cart.
+     * Check value of last update of cart in localStorage,
+     * and if it is more than expiration time of cart, which is setted
+     * on 7 days, clears our cart*/
+    setExpire() {
+        const key = "last update";
+        const storageInit = this.storage.read(key);
+
+        if (!storageInit) {
+            this.storage.write(key, +new Date())
+        } else if (+new Date() - storageInit > this.cartExpirationLimit) {
+            this.clear();
+        }
     }
 }
 
@@ -314,41 +352,25 @@ const bagCounters = document.getElementById("bag");
 const addBtns = document.getElementsByClassName("product__addBtn");
 
 for (let i = 0; i < addBtns.length; i++) {
-    addBtns[i].addEventListener("click", function () {
-        const parent = this.parentNode;
-        const id = parent.dataset.id;
-        const img = parent
-            .getElementsByClassName("product__img")[0]
-            .getElementsByTagName("img")[0]
-            .getAttribute("src");
-        const name = parent
-            .getElementsByClassName("product__description")[0]
-            .getElementsByClassName("product__description__title")[0].innerText;
-        const price = parent
-            .getElementsByClassName("product__description")[0]
-            .getElementsByClassName("product__description__price")[0].innerText;
-        const desc = parent
-            .getElementsByClassName("product__description")[0]
-            .getElementsByClassName("product__description__text")[0].innerText;
+    addBtns[i].addEventListener("click", addToCart);
+}
 
-        const currentProduct = new ProductModel();
+function addToCart() {
+    const parent = this.parentNode;
+    const id = parent.dataset.id;
+    const img = parent.getElementsByTagName("img")[0].getAttribute("src");
+    const name = parent.getElementsByClassName("product__description__title")[0].innerText;
+    const price = parent.getElementsByClassName("product__description__price")[0].innerText;
+    const desc = parent.getElementsByClassName("product__description__text")[0].innerText;
+    const currentProduct = new ProductModel();
+    currentProduct.id = id;
+    currentProduct.img = img;
+    currentProduct.name = name;
+    currentProduct.price = price;
+    currentProduct.desc = desc;
 
-        currentProduct.id = id;
-        currentProduct.img = img;
-        currentProduct.name = name;
-        currentProduct.price = price;
-        currentProduct.desc = desc;
+    cart.addProduct(currentProduct);
 
-        cart.addProduct(currentProduct);
-
-        const cartItems = cart.read();
-        let priceCounter = 0;
-        let amountCounter = 0;
-        cartItems.forEach((item) => {
-            priceCounter += parseInt(item._price) * parseInt(item._amount);
-            amountCounter += parseInt(item._amount)
-        });
-
-        bagCounters.innerText = priceCounter + "£ " + "(" + amountCounter + ")";
-    });
+    const productsInfo = cart.calcTotalInfo();
+    bagCounters.innerText = productsInfo.totalPrice + "£ " + "(" + productsInfo.totalAmount + ")";
 }
